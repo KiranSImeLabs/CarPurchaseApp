@@ -11,7 +11,7 @@ import SwiftUI
 struct CarPurchaseAppApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            MainViewSwitcher()
         }
     }
 }
