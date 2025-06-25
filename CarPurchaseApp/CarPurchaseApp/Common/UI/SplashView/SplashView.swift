@@ -5,22 +5,22 @@
 //  Created by Simelabs on 24/06/25.
 //
 import SwiftUI
+import Lottie
 
 struct SplashView: View {
     @Binding var isActive: Bool
-
+    var loopMode:LottieLoopMode = .playOnce
     var body: some View {
         ZStack {
-            Color.black.ignoresSafeArea()
+            Color.brown.ignoresSafeArea()
             
             VStack {
                 HStack(spacing: 16.0){
-                    LottieView(animationName: "car_splash", loopMode: .playOnce)
-//                        .frame(width: 200, height: 200)
+                    LottieView(animationName: "car_splash", loopMode: loopMode)
                         .padding(20)
                 }
                 
-                Text("CarZilla")
+                Text("Let's try a ride ........")
                     .font(.title)
                     .foregroundColor(.white)
                     .padding(.top, 20)
@@ -36,3 +36,7 @@ struct SplashView: View {
     }
 }
 
+
+#Preview {
+    SplashView(isActive: .constant(true),loopMode: .loop)
+}

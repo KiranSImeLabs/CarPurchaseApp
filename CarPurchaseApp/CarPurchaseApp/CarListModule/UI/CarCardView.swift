@@ -42,3 +42,7 @@ struct CarCardView: View {
     }
 }
 
+#Preview {
+    CarCardView(car: Car(name: "BMW M4", model: "Coupe 2022", price: "A$75 Lakh", fuelType: .petrol, mileage: "15,000 km", imageName: "bmw"))
+        .frame(width: 300, height: 300)
+}

@@ -14,6 +14,7 @@ struct CarListView: View {
         NavigationStack {
             
             ZStack(alignment: .center){
+//                Color.white.ignoresSafeArea()
                 VStack {
                     // Search bar
                     TextField("Search cars...", text: $viewModel.searchText)
@@ -43,10 +44,7 @@ struct CarListView: View {
                     // Car List
                     List {
                         ForEach(viewModel.filteredCars,id: \.id) { car in
-                            
-                            NavigationLink {
-                                CarDetailView(car: car)
-                            } label: {
+                            NavigationLink(destination:  CarDetailView(car: car)) {
                                 CarCardView(car: car)
                             }
                             .foregroundStyle(.clear, .clear) // (title color of cell, right cheveron color of cell)
@@ -61,8 +59,9 @@ struct CarListView: View {
                     .background(Color.clear)
                     
                 }//VStack
-                .background(BackgroundView(topColor: .orange, bottomColor: .yellow))
+                .background(BackgroundView(topColor: .gray, bottomColor: .yellow))
             }//ZStack
+            
             .navigationTitle("Cars")
         }
     }
