@@ -12,6 +12,9 @@ protocol CarSearchServicesProtocol {
     func getSearchResult() -> AnyPublisher<CarModel, Error>
 }
 //http://192.168.0.72:3000/cars/getAllCars?limit=5&page=1
+
+//http://192.168.0.72:3000/cars/getAllCars?selectedMake=Ford&maxPrice=60000&minPrice=10000page=1&limit=20
+
 struct CarSearchServices:CarSearchServicesProtocol{
     func getSearchResult() -> AnyPublisher<CarModel, any Error> {
         let request = CarSearchRequest()
@@ -60,7 +63,7 @@ struct CarFilterSearchRequest: NetworkRequest {
          */
 
         if let val = paramDict["selectedMake"] as? String, val.trim().count > 0{
-            string += "selectedMake=" + val
+            string += "make=" + val
             
         }
         
@@ -74,7 +77,7 @@ struct CarFilterSearchRequest: NetworkRequest {
         }
         
         
-        return APIConstants.getFilteredCar + string + "page=\(1)&limit=\(20)"
+        return APIConstants.getFilteredCar + string + "&page=\(1)&limit=\(20)"
     } //APIConstants.getAllCars
     let method = "GET"
 

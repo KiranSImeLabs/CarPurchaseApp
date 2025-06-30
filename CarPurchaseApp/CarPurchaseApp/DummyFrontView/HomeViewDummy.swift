@@ -16,24 +16,41 @@ struct HomeViewDummy: View {
         
         ScrollView{
             ZStack(alignment:.top){
-                Image("Banner_Image")
-                    .resizable()
-                    .frame(height: 300)
-                    .scaledToFit()
-                    .padding(0)
                 
                 VStack(alignment: .leading) {
-                    Spacer().frame(height: 300) //230
+//                    Spacer()
+//                        .frame(height: 60)
+                    
+                    HStack(spacing: 0){
+                        ZStack(alignment: .bottom) {
+                            Rectangle()
+                                .fill(Color.init(red: 145.0/255.0, green: 127.0/255.0, blue: 109.0/255.0))
+                                .frame(width: 90,height: 70)
+                            Image("Logo")
+                                .resizable()
+                                .frame(width: 45,height: 20)
+                                .scaledToFill()
+                                .padding(.bottom,10)
+                            
+                        }
+                        Rectangle()
+                            .fill(Color.init(red: 242.0/255.0, green: 232.0/255.0, blue: 203.0/255.0))
+                            .frame(height: 70) // Adjust height as needed
+                        
+                    }
+                    
+                    Image("Banner_Image")
+                        .resizable()
+                        .frame(height: 150)
+                        .scaledToFit()
+                        .padding(0)
+                    // Spacer().frame(height: 300) //230
                     
                     VStack(spacing: 16) {
                         SectionHeader(title: "Top Picks For You")
                         GridSection(items: ["Buy used car", "Sell car", "Get loans"])
                         
-                        SectionHeader(title: "Manage Your Car")
-                        GridSection(items: ["Orbit", "Pay challan", "FASTag", "Get insurance"])
-                        
-                        SectionHeader(title: "Check Before You Buy")
-                        GridSection(items: ["New car check", "Used car check", "RTO check", "Vehicle history"])
+                        SectionHeader(title: "Featured Lisiting")
                     }
                     .padding()
                     
@@ -54,22 +71,22 @@ struct HomeViewDummy: View {
                         
                         
                         // Car List
-                       /* List {
-                            ForEach(viewModel.filteredCars,id: \.id) { car in
-                                NavigationLink(destination:  CarSearchView()) {
-                                    CarCardView(car: car)
-                                        .backgroundStyle(.brown)
-                                        .shadow(color: .gray, radius: 8.0)
-                                }
-                                .foregroundStyle(.clear, .clear) // (title color of cell, right cheveron color of cell)
-                                
-                            }
-                            .listRowBackground(Color.clear)
-                            .listRowSeparatorTint(.clear)
-                            
-                        } //: LIST
-                        .scrollIndicators(.hidden)
-                        .listStyle(.plain)*/
+                        /* List {
+                         ForEach(viewModel.filteredCars,id: \.id) { car in
+                         NavigationLink(destination:  CarSearchView()) {
+                         CarCardView(car: car)
+                         .backgroundStyle(.brown)
+                         .shadow(color: .gray, radius: 8.0)
+                         }
+                         .foregroundStyle(.clear, .clear) // (title color of cell, right cheveron color of cell)
+                         
+                         }
+                         .listRowBackground(Color.clear)
+                         .listRowSeparatorTint(.clear)
+                         
+                         } //: LIST
+                         .scrollIndicators(.hidden)
+                         .listStyle(.plain)*/
                     }else{
                         Text("No Car found")
                     }
@@ -118,11 +135,11 @@ struct SectionHeader: View {
     let title: String
     var body: some View {
         HStack {
-            Text("✨")
+            //            Text("✨")
             Text(title.uppercased())
                 .font(.headline)
                 .fontWeight(.bold)
-            Text("✨")
+            //            Text("✨")
             Spacer()
         }
         .padding(.top)
