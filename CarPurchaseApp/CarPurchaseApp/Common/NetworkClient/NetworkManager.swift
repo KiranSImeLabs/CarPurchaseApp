@@ -19,9 +19,9 @@ class NetworkManager:NetworkClient{
     
     func send<T>(_ request: T) -> AnyPublisher<T.ResponseType, any Error> where T : NetworkRequest {
         
-        guard NetworkMonitor.shared.isConnected else {
-            return Fail(error: URLError(.notConnectedToInternet)).eraseToAnyPublisher()
-        }
+//        guard NetworkMonitor.shared.isConnected else {
+//            return Fail(error: URLError(.notConnectedToInternet)).eraseToAnyPublisher()
+//        }
         
         
         guard let url = URL(string: request.endpoint, relativeTo: baseURL) else {

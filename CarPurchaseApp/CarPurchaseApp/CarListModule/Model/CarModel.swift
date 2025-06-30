@@ -6,17 +6,16 @@
 //
 
 import Foundation
-struct Car: Identifiable,Hashable {
-    let id = UUID()
-    let name: String
-    let model: String
-    let price: String
-    let fuelType: FuelType
-    let mileage: String
-    let imageName: String
+// MARK: - CarModel
+struct CarModel: Codable {
+    let data: [CarData]
+    let page, limit: String
+    let total: Int
 }
 
-enum FuelType: String, CaseIterable, Identifiable {
-    case petrol, diesel, electric, hybrid
-    var id: String { rawValue }
+// MARK: - Datum
+struct CarData: Codable {
+    let id, title: String
+    let mainImage: String
+    let price:Int?
 }

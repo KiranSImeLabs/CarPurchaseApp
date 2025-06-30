@@ -8,9 +8,9 @@
 import Foundation
 internal struct APIConstants {
     static var baseUrl :String{
-        return AppConstant.isProduction ? "https://brollert.simelabs.in" : "https://brollert.simelabs.in"
+        return AppConstant.isProduction ? "http://192.168.0.72:3000" : "http://192.168.0.72:3000"
     }
-    static let googleApiScope = "https://www.googleapis.com/auth/calendar.readonly"
+    //http://192.168.0.72:3000/cars/getAllCars?page=1&limit=5
     static let httpPost  =  "POST"
     static let httpGet  =  "GET"
     static let httpPut  =  "PUT"
@@ -19,6 +19,18 @@ internal struct APIConstants {
     static let timeoutInterval30 = 30.0
     static let timeoutInterval10 = 10.0
     static let cachePolicy:NSURLRequest.CachePolicy = .reloadIgnoringLocalAndRemoteCacheData
+    
+    //{{baseUrl}}/getAllCars?page=1&limit=5
+    static let getAllCars = "/cars/getAllCars?page=1&limit=20"
+    static let getFilteredCar = "/cars/getAllCars?"
+    //http://192.168.0.72:3000/cars/getCarDetails/b6dd97be-dfbd-445b-93d8-7107488ae4d6
+    static let getCarDetails = "/cars/getCarDetails/"
+    
+    /*
+     For search
+     {{baseUrl}}/cars/getAllCars?page=1&limit=5&make=tata
+     */
+    
     
     static let loginUrl = "/login/"
     static let otp_verificationUrl = "/otp_verification/"

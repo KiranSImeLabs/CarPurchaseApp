@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "Banner_Image.jpg",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

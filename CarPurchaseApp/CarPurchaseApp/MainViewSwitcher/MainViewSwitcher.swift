@@ -10,12 +10,14 @@ struct MainViewSwitcher: View {
     @State private var showSplash = true
 
     var body: some View {
-        Group {
-            if showSplash {
-                SplashView(isActive: $showSplash)
-            } else {
-                CarListView()
-            }
+        if showSplash {
+            SplashView(isActive: $showSplash)
+        } else {
+            DummyFrontView().ignoresSafeArea()
+            //CarListView()
+//            SearchFilterView(onApply: { dic in
+//                print(dic)
+//            })
         }
     }
 }

@@ -14,7 +14,7 @@ struct CarListView: View {
         NavigationStack {
             
             ZStack(alignment: .center){
-//                Color.white.ignoresSafeArea()
+                //                Color.white.ignoresSafeArea()
                 VStack {
                     // Search bar
                     TextField("Search cars...", text: $viewModel.searchText)
@@ -22,29 +22,9 @@ struct CarListView: View {
                         .background(Color(.secondarySystemBackground))
                         .cornerRadius(10)
                         .padding(.horizontal)
-                    
-                    // Filter options
-                    ScrollView(.horizontal, showsIndicators: false) {
-                        HStack {
-                            Button("All") {
-                                viewModel.selectedFuel = nil
-                            }
-                            .filterButtonStyle(selected: viewModel.selectedFuel == nil)
-                            
-                            ForEach(FuelType.allCases) { fuel in
-                                Button(fuel.rawValue.capitalized) {
-                                    viewModel.selectedFuel = fuel
-                                }
-                                .filterButtonStyle(selected: viewModel.selectedFuel == fuel)
-                            }
-                        }
-                        .padding(.horizontal)
-                    }//ScrollView
-                    
-                    // Car List
                     List {
                         ForEach(viewModel.filteredCars,id: \.id) { car in
-                            NavigationLink(destination:  CarDetailView(car: car)) {
+                            NavigationLink(destination:  CarDetailView(carId: car.id)) {
                                 CarCardView(car: car)
                             }
                             .foregroundStyle(.clear, .clear) // (title color of cell, right cheveron color of cell)

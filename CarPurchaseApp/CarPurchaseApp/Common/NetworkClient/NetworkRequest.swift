@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol NetworkRequest:NSObject{
+protocol NetworkRequest{
     
     associatedtype ResponseType: Decodable
     var endpoint: String { get }
