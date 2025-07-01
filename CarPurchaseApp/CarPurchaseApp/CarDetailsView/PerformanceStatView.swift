@@ -18,7 +18,7 @@ struct PerformanceStatView: View {
                 Text(value)
                     .font(.headline)
                     .bold()
-                Text(unit)
+                Text(" " + unit)
                     .font(.subheadline)
                     .foregroundColor(.secondary)
             }

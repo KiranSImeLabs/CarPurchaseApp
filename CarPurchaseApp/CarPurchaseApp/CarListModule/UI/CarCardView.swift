@@ -32,7 +32,7 @@ struct CarCardView: View {
                 .fontWeight(.heavy)
                 .foregroundColor(.black)
             
-            Text("A$\(car.price ?? 32000)")
+            Text("A$ \(car.price ?? 32000)")
                 .font(.system(size: 15, weight: .semibold))
                 .foregroundColor(.white)
                 .padding(.horizontal, 10)

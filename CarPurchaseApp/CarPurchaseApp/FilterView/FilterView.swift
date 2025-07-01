@@ -37,7 +37,7 @@ struct SearchFilterView: View {
                     Image(systemName: "xmark.circle")
                         .resizable()
                         .frame(width: 30,height: 30)
-                        .foregroundStyle(.black)
+                        .foregroundStyle(AppColorConstants.primaryColor)
                         
                 }
             }
@@ -192,7 +192,8 @@ struct SearchFilterView: View {
                     }
                 }
             }
-            
+            .scrollIndicators(.hidden)
+            .padding(5)
             
             HStack {
                 Button("Reset") {
@@ -247,6 +248,7 @@ struct WrapHStack: View {
                         Circle()
                             .fill(color)
                             .frame(width: 10, height: 10)
+                            .shadow(color: .gray, radius: 1.0, y: 1.0)
                     }
                     Text(item)
                 }

@@ -10,6 +10,7 @@ import Foundation
 
 class CarDetailViewModel: ObservableObject {
     @Published private(set) var carDetails: CarDetailModel?
+    var otherImages:[String] = [String]()
     private var cancellables = Set<AnyCancellable>()
 
     
@@ -19,6 +20,10 @@ class CarDetailViewModel: ObservableObject {
             .sink { error in
                 print(error)
             } receiveValue: { [weak self] value in
+                self?.otherImages.removeAll()
+                for img in value.otherImages{
+                    self?.otherImages.append(img.src)
+                }
                 self?.carDetails = value
             }
             .store(in: &cancellables)

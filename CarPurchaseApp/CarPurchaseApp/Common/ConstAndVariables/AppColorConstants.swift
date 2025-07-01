@@ -5,13 +5,18 @@
 //  Created by Simelabs on 11/09/24.
 //
 
-import UIKit
+import SwiftUI
 struct AppColorConstants {
     static let whiteColor = "#EEEEEE"
-    static let buttonBackgroundColor = "#0E60FB"
+    
     static let textFieldColor = "#102835"
     static let footerColor = "#6A6E9F"
-    static let primaryColor = "#0C0F2F"
+    static let primaryColor = Color.init(red: 145.0/255.0, green: 127.0/255.0, blue: 109.0/255.0)
+    static let secondaryColor = Color.init(red: 242.0/255.0, green: 232.0/255.0, blue: 203.0/255.0)
+    static let tertiaryColor = Color.init(red: 88.0/255.0, green: 122.0/255.0, blue: 120.0/255.0)
+    static let redColor = Color.init(red: 204.0/255.0, green: 0.0/255.0, blue: 0.0/255.0)
+    //rgba(204, 0, 0, 1)
+    
     static let primaryColor2 = "#868686"
     static let tabBarImageDefaultColor = "#9698B7"
     static let rainBackGround = "D9E8FF"

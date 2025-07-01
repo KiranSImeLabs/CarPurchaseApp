@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "icon_why_vintage.png",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

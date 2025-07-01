@@ -12,7 +12,7 @@ struct SplashView: View {
     var loopMode:LottieLoopMode = .playOnce
     var body: some View {
         ZStack {
-            Color.brown.ignoresSafeArea()
+            AppColorConstants.primaryColor.ignoresSafeArea()
             
             VStack {
                 HStack(spacing: 16.0){
@@ -20,9 +20,10 @@ struct SplashView: View {
                         .padding(20)
                 }
                 
-                Text("Let's try a ride ........")
-                    .font(.title)
-                    .foregroundColor(.white)
+                Image("Logo")
+                    .resizable()
+                    .frame(width: 188,height: 50)
+                    .scaledToFit()
                     .padding(.top, 20)
             }
         }

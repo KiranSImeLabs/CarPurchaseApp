@@ -23,7 +23,7 @@ class CarListViewModel: ObservableObject {
     }
     
     private func getCarList(){
-        CarSearchServices().getSearchResult()
+        CarSearchServices().getSearchResult(linit: 5)
             .sink { error in
                 print(error)
             } receiveValue: { [weak self] value in

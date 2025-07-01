@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "icon_benz.png",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

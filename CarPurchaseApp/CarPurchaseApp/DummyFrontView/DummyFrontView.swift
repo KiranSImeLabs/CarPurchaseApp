@@ -17,10 +17,11 @@ struct DummyFrontView: View {
                 HomeViewDummy(tabSelection: $selectedIndex)
                     .ignoresSafeArea()
                 Spacer()
-                    .toolbar(.hidden, for: .navigationBar)
             }
+            .toolbar(.hidden, for: .navigationBar)
+            .tint(AppColorConstants.primaryColor)
             .tabItem {
-                Text("Home view")
+                Text("Home")
                 Image(systemName: "house.fill")
                     .renderingMode(.template)
             }
@@ -30,35 +31,35 @@ struct DummyFrontView: View {
             NavigationStack() {
                 CarSearchView()
             }
+            .tint(AppColorConstants.primaryColor)
             .tabItem {
                 Label("Browse", systemImage: "magnifyingglass")
             }
             .tag(1)
             
             NavigationStack() {
-                Text("Account view")
-                    .navigationTitle("Account")
-                
+                MenuView()
             }
+            .tint(AppColorConstants.primaryColor)
             .tabItem {
-                Text("Account")
-                Image(systemName: "person.crop.circle")
+                Text("Menu")
+                Image(systemName: "line.3.horizontal")
                 
             }
 //            .badge("12")
             .tag(2)
             
         }//TabView
-        .tint(.blue)
+        .tint(AppColorConstants.redColor)
         .onAppear(perform: {
             
             UITabBar.appearance().barTintColor = UIColor.white
             
-            UITabBar.appearance().unselectedItemTintColor = .gray
+            UITabBar.appearance().unselectedItemTintColor = UIColor(AppColorConstants.primaryColor)
             
             UITabBarItem.appearance().badgeColor = .blue
             
-            UITabBar.appearance().backgroundColor = .systemGray4.withAlphaComponent(0.4)
+            UITabBar.appearance().backgroundColor = .white//.systemGray4.withAlphaComponent(0.4)
             
             UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor: UIColor.systemPink]
             //UITabBar.appearance().scrollEdgeAppearance = UITabBarAppearance()

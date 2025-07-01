@@ -21,7 +21,7 @@ internal struct APIConstants {
     static let cachePolicy:NSURLRequest.CachePolicy = .reloadIgnoringLocalAndRemoteCacheData
     
     //{{baseUrl}}/getAllCars?page=1&limit=5
-    static let getAllCars = "/cars/getAllCars?page=1&limit=20"
+    static let getAllCars = "/cars/getAllCars?page=1&limit="
     static let getFilteredCar = "/cars/getAllCars?"
     //http://192.168.0.72:3000/cars/getCarDetails/b6dd97be-dfbd-445b-93d8-7107488ae4d6
     static let getCarDetails = "/cars/getCarDetails/"

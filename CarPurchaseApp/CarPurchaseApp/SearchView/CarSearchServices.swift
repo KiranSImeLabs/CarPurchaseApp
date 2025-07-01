@@ -9,15 +9,15 @@ import Foundation
 import Combine
 
 protocol CarSearchServicesProtocol {
-    func getSearchResult() -> AnyPublisher<CarModel, Error>
+    func getSearchResult(linit:Int) -> AnyPublisher<CarModel, Error>
 }
 //http://192.168.0.72:3000/cars/getAllCars?limit=5&page=1
 
 //http://192.168.0.72:3000/cars/getAllCars?selectedMake=Ford&maxPrice=60000&minPrice=10000page=1&limit=20
 
 struct CarSearchServices:CarSearchServicesProtocol{
-    func getSearchResult() -> AnyPublisher<CarModel, any Error> {
-        let request = CarSearchRequest()
+    func getSearchResult(linit:Int = 20) -> AnyPublisher<CarModel, any Error> {
+        let request = CarSearchRequest(limit: linit)
         //let client = DefaultNetworkClient(baseURL: URL(string: "https://api.example.com")!)
         let client = NetworkManager(baseURL: URL(string: APIConstants.baseUrl)!)
        
@@ -39,9 +39,11 @@ struct CarSearchServices:CarSearchServicesProtocol{
 
 struct CarSearchRequest: NetworkRequest {
     var httpHeader: [String : String]?
-    
+    let limit:Int
     typealias ResponseType = CarModel
-    let endpoint = APIConstants.getAllCars
+    var endpoint:String{
+        return APIConstants.getAllCars + "\(limit)"
+    }
     let method = "GET"
 
     func decode(data: Data) throws -> CarModel {

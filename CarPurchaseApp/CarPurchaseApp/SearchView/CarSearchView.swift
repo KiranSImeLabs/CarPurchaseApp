@@ -20,6 +20,28 @@ struct CarSearchView: View {
 //                .scaledToFit()
 //                .padding(0)
             VStack(alignment: .leading) {
+                // Car List
+                List {
+                    ForEach(viewModel.filteredCars,id: \.id) { car in
+                        CarCardView(car: car)
+                            .shadow(color: .gray, radius: 8.0)
+                            .overlay(content: {
+                                NavigationLink(destination:  CarDetailView(carId: car.id)) {
+                                    EmptyView()
+                                }
+                                .opacity(0)
+                            })
+                         // (title color of cell, right cheveron color of cell)
+                        
+                    }
+                    .listRowBackground(Color.white)
+                    .listRowSeparatorTint(.white)
+                    
+                } //: LIST
+                .scrollIndicators(.hidden)
+                .listStyle(.plain)
+                .backgroundStyle(Color.white)
+                .background(Color.white)
                 HStack{
                     SearchTextField(text: $viewModel.searchText)
                         .padding(.leading, 10)
@@ -38,25 +60,7 @@ struct CarSearchView: View {
                     .padding(.trailing, 10)
 
                 }
-                
-                // Car List
-                List {
-                    ForEach(viewModel.filteredCars,id: \.id) { car in
-                        NavigationLink(destination:  CarDetailView(carId: car.id)) {
-                            CarCardView(car: car)
-                                .shadow(color: .gray, radius: 8.0)
-                        }
-                        .foregroundStyle(.white) // (title color of cell, right cheveron color of cell)
-                        
-                    }
-                    .listRowBackground(Color.white)
-                    .listRowSeparatorTint(.white)
-                    
-                } //: LIST
-                .scrollIndicators(.hidden)
-                .listStyle(.plain)
-                .backgroundStyle(Color.white)
-                .background(Color.white)
+                .padding(.bottom, 10)
             }
         }.fullScreenCover(isPresented: $showOverlay) {
             SearchFilterView(onApply: { dic in

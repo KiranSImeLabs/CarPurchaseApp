@@ -41,9 +41,9 @@ struct CarListView: View {
                 }//VStack
                 .background(BackgroundView(topColor: .gray, bottomColor: .yellow))
             }//ZStack
-            
             .navigationTitle("Cars")
         }
+        
     }
 }
 
