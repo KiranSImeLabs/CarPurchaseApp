@@ -11,8 +11,9 @@ struct AppColorConstants {
     
     static let textFieldColor = "#102835"
     static let footerColor = "#6A6E9F"
-    static let primaryColor = Color.init(red: 145.0/255.0, green: 127.0/255.0, blue: 109.0/255.0)
-    static let secondaryColor = Color.init(red: 242.0/255.0, green: 232.0/255.0, blue: 203.0/255.0)
+    //rgba(255, 39, 6, 1)
+    static let primaryColor = Color.init(red: 255.0/255.0, green: 39.0/255.0, blue: 6.0/255.0)
+    static let secondaryColor = Color.black
     static let tertiaryColor = Color.init(red: 88.0/255.0, green: 122.0/255.0, blue: 120.0/255.0)
     static let redColor = Color.init(red: 204.0/255.0, green: 0.0/255.0, blue: 0.0/255.0)
     //rgba(204, 0, 0, 1)

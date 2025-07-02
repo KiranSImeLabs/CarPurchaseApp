@@ -22,7 +22,7 @@ struct ExampleRow: View {
 }
 
 struct MenuView: View {
-    @State private var scale: CGFloat = 1.0
+//    @State private var scale: CGFloat = 1.0
     
     var body: some View {
         List {
@@ -41,20 +41,20 @@ struct MenuView: View {
             }
             
             VStack(spacing: 16) {
-                SectionHeader(title: "Why Vintage Motora?")
+                SectionHeader(title: "Why Motora?")
                 Image("icon_why_vintage")
                     .resizable()
                     .scaledToFit()
                     .frame(height: 100)
-                    .scaleEffect(scale)
-                    .onAppear {
-                        withAnimation(
-                            Animation.easeInOut(duration: 2.5)
-                                .repeatForever(autoreverses: true)
-                        ) {
-                            scale = 1.1 // target scale
-                        }
-                    }
+//                    .scaleEffect(scale)
+//                    .onAppear {
+//                        withAnimation(
+//                            Animation.easeInOut(duration: 2.5)
+//                                .repeatForever(autoreverses: true)
+//                        ) {
+//                            scale = 1.1 // target scale
+//                        }
+//                    }
                 
             }
         }

@@ -15,16 +15,14 @@ struct SplashView: View {
             AppColorConstants.primaryColor.ignoresSafeArea()
             
             VStack {
-                HStack(spacing: 16.0){
-                    LottieView(animationName: "car_splash", loopMode: loopMode)
-                        .padding(20)
-                }
+                LottieView(animationName: "car_splash", loopMode: loopMode)
+                    .padding(20)
                 
                 Image("Logo")
                     .resizable()
-                    .frame(width: 188,height: 50)
                     .scaledToFit()
-                    .padding(.top, 20)
+                    .frame(width: 150)
+                    
             }
         }
         .onAppear {

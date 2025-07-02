@@ -9,6 +9,8 @@ import SwiftUI
 
 struct SearchTextField: View {
     @Binding var text: String
+//    @Binding var isFocusOn:Bool = false
+    
     var isText: Bool = true
     var body: some View {
         ZStack(alignment: .leading){

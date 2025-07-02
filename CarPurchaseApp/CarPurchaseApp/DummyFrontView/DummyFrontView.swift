@@ -55,7 +55,7 @@ struct DummyFrontView: View {
             
             UITabBar.appearance().barTintColor = UIColor.white
             
-            UITabBar.appearance().unselectedItemTintColor = UIColor(AppColorConstants.primaryColor)
+            UITabBar.appearance().unselectedItemTintColor = UIColor(AppColorConstants.secondaryColor)
             
             UITabBarItem.appearance().badgeColor = .blue
             

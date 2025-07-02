@@ -28,9 +28,9 @@ struct HomeViewDummy: View {
                                 .frame(width: 110,height: 70)
                             Image("Logo")
                                 .resizable()
-                                .frame(width: 77,height: 20)
+                                .frame(width: 88,height: 15)
                                 .scaledToFit()
-                                .padding(.bottom,10)
+                                .padding(.bottom,5)
                             
                         }
                         Rectangle()
@@ -47,9 +47,8 @@ struct HomeViewDummy: View {
                     //rgba(88, 122, 120, 1)
                     HStack {
                         Spacer()
-                        Text("Drive the Legacy. Own a Classic")
-                            .italic()
-                            .foregroundStyle(Color.init(red: 88.0/255.0, green: 122.0/255.0, blue: 120.0/255.0))
+                        Text("Explore Australia’s finest collection of cars, old and new.")
+                            .foregroundStyle(.black)
                             .font(.subheadline)
                             .fontWeight(.regular)
                         Spacer()
@@ -59,11 +58,13 @@ struct HomeViewDummy: View {
                     
                     // Spacer().frame(height: 300) //230
                     
-                    VStack(spacing: 16) {
+                    VStack() {
                         SectionHeader(title: "Top Picks For You")
-                        GridSection(items: ["Buy used car", "Sell car", "Get loans"])
-                        SectionHeader(title: "Featured Vintage Brands")
-                        
+                            .padding(.bottom)
+                        GridSection(items: ["Buy car", "Sell car", "Get loans"])
+                            .padding(.bottom)
+                        SectionHeader(title: "Featured Brands")
+                            .padding(.bottom)
                         HStack{
                             Spacer()
                             Image("icon_ford")
@@ -89,7 +90,7 @@ struct HomeViewDummy: View {
                         }
                     }
                     .padding([.leading, .trailing,.top])
-                    .padding(.bottom,0)
+//                    .padding(.bottom,0)
                     
                     
                     if viewModel.filteredCars.count > 0 {
@@ -103,10 +104,11 @@ struct HomeViewDummy: View {
                             NavigationLink(destination:  CarDetailView(carId: car.id)) {
                                 CarCardView(car: car)
                                     .backgroundStyle(.brown)
-                                    .shadow(color: .gray, radius: 2.0)
-                                    .padding(5)
+                                    .padding([.leading,.trailing],8)
+                                    .padding(.bottom,3)
                             }
-                            .foregroundStyle(.clear, .clear) // (title color of cell, right cheveron color of cell)
+                            .foregroundStyle(.clear, .clear)
+                            // (title color of cell, right cheveron color of cell)
                             
                         }
                     }else{
@@ -135,7 +137,7 @@ struct GridSection: View {
     let items: [String]
     let columns = [GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible())]
 
-    let image = ["car.fill","car.2.fill","banknote.fill"]
+    let image = ["buy_used_car","Sell_car","get_loan"]
     var body: some View {
         LazyVGrid(columns: columns, spacing: 16) {
             ForEach(Array(items.enumerated()), id: \.element) { index, item in
@@ -144,7 +146,13 @@ struct GridSection: View {
                     RoundedRectangle(cornerRadius: 10)
                         .fill(Color.gray.opacity(0.1))
                         .frame(height: 70)
-                        .overlay(Label("", systemImage: image[index]).foregroundStyle(AppColorConstants.primaryColor))
+                        .overlay(
+                            Image(image[index])
+                            .resizable()
+                            .frame(width: 42, height: 40, alignment: .center)
+                            .tint(AppColorConstants.primaryColor)
+                            .foregroundStyle(AppColorConstants.primaryColor)
+                        )
                     Text(item)
                         .multilineTextAlignment(.center)
                 }
@@ -165,6 +173,5 @@ struct SectionHeader: View {
             //            Text("✨")
             Spacer()
         }
-        .padding(.top)
     }
 }

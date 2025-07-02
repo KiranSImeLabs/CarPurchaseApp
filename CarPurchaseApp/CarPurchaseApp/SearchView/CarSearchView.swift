@@ -10,6 +10,7 @@ import SwiftUI
 struct CarSearchView: View {
     @StateObject private var viewModel = CarSearchViewModel()
     @State private var showOverlay = false
+    @FocusState var isFocusOn: Bool
     
     
     var body: some View {
@@ -24,7 +25,8 @@ struct CarSearchView: View {
                 List {
                     ForEach(viewModel.filteredCars,id: \.id) { car in
                         CarCardView(car: car)
-                            .shadow(color: .gray, radius: 8.0)
+                            .padding(.bottom,5)
+//                            .shadow(color: .gray, radius: 8.0)
                             .overlay(content: {
                                 NavigationLink(destination:  CarDetailView(carId: car.id)) {
                                     EmptyView()
@@ -44,7 +46,13 @@ struct CarSearchView: View {
                 .background(Color.white)
                 HStack{
                     SearchTextField(text: $viewModel.searchText)
+                        .focused($isFocusOn)
                         .padding(.leading, 10)
+                        .onAppear {
+                            DispatchQueue.main.async {
+                                isFocusOn = true
+                            }
+                        }
                     Button {
                         showOverlay = true
                     } label: {
