@@ -14,7 +14,7 @@ struct DummyFrontView: View {
         TabView(selection: $selectedIndex) {
             
             NavigationStack() {
-                HomeViewDummy(tabSelection: $selectedIndex)
+                HomeView()
                     .ignoresSafeArea()
                 Spacer()
             }

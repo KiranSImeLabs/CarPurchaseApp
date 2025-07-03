@@ -24,6 +24,88 @@ struct SearchFilterView: View {
     @State private var color: String = "All"
     @State private var modelYearText:String = ""
     @State private var bodyTypeText:String = ""
+    
+    
+    
+    
+    fileprivate func makeAndModelSection() -> some View {
+        return (
+            HStack {
+                VStack(alignment: .leading) {
+                    Text("Make")
+                    Menu {
+                        Button("Citro")
+                        { selectedMake = "Citro" }
+                        Button("Pontiac")
+                        { selectedMake = "Pontiac" }
+                        Button("Alfa")
+                        { selectedMake = "Alfa" }
+                        Button("Fiat")
+                        { selectedMake = "Fiat" }
+                        Button("BMW")
+                        { selectedMake = "BMW" }
+                        Button("Chevrolet")
+                        { selectedMake = "Chevrolet" }
+                        Button("Ford")
+                        { selectedMake = "Ford" }
+                        Button("Volkswagen")
+                        { selectedMake = "Volkswagen" }
+                        Button("Jaguar")
+                        { selectedMake = "Jaguar" }
+                        Button("Mercedes-Benz")
+                        { selectedMake = "Mercedes-Benz" }
+                        Button("Porsche")
+                        { selectedMake = "Porsche" }
+                        Button("Buick Roadmaster ")
+                        { selectedMake = "Buick Roadmaster " }
+                        Button("Cadillac")
+                        { selectedMake = "Cadillac" }
+                        
+                        
+                        
+                        
+                    } label: {
+                        HStack {
+                            Text(selectedMake.isEmpty ? "Select" : selectedMake)
+                                .foregroundStyle(.black)
+                            Spacer()
+                            Image(systemName: "chevron.down")
+                                .foregroundStyle(.black)
+                        }
+                        
+                        .padding()
+                        .background(RoundedRectangle(cornerRadius: 8).stroke(Color.black, lineWidth: 1))
+                    }
+                    .border(Color.clear)
+                }
+                
+                VStack(alignment: .leading) {
+                    Text("Model")
+                    Menu {
+                        Button("Model X") { selectedModel = "Model X" }
+                        Button("Model Y") { selectedModel = "Model Y" }
+                    } label: {
+                        HStack {
+                            Text(selectedModel.isEmpty ? "Select" : selectedModel)
+                                .foregroundStyle(.black)
+                            Spacer()
+                            Image(systemName: "chevron.down")
+                                .foregroundStyle(.black)
+                        }
+                        .padding()
+                        .background(RoundedRectangle(cornerRadius: 8).stroke(Color.black, lineWidth: 1))
+                    }
+                    .border(Color.clear)
+                }
+            })
+//        .padding(0)
+//        .background(Color.black.opacity(0.8))
+    }
+    
+    
+    
+    
+    
     var body: some View {
         VStack(alignment: .leading, spacing: 20) {
             HStack{
@@ -41,6 +123,7 @@ struct SearchFilterView: View {
                         
                 }
             }
+            .padding(.horizontal, 20)
             /*
              Citro DS /19710/ Specs
              Pontiac GTO /19712/ Specs
@@ -49,74 +132,12 @@ struct SearchFilterView: View {
              */
             ScrollView{
                 VStack(alignment: .leading, spacing: 20) {
-                    HStack {
-                        VStack(alignment: .leading) {
-                            Text("Make")
-                            Menu {
-                                Button("Citro")
-                                { selectedMake = "Citro" }
-                                Button("Pontiac")
-                                { selectedMake = "Pontiac" }
-                                Button("Alfa")
-                                { selectedMake = "Alfa" }
-                                Button("Fiat")
-                                { selectedMake = "Fiat" }
-                                Button("BMW")
-                                { selectedMake = "BMW" }
-                                Button("Chevrolet")
-                                { selectedMake = "Chevrolet" }
-                                Button("Ford")
-                                { selectedMake = "Ford" }
-                                Button("Volkswagen")
-                                { selectedMake = "Volkswagen" }
-                                Button("Jaguar")
-                                { selectedMake = "Jaguar" }
-                                Button("Mercedes-Benz")
-                                { selectedMake = "Mercedes-Benz" }
-                                Button("Porsche")
-                                { selectedMake = "Porsche" }
-                                Button("Buick Roadmaster ")
-                                { selectedMake = "Buick Roadmaster " }
-                                Button("Cadillac")
-                                { selectedMake = "Cadillac" }
-                                
-                                
-                                
-                                
-                            } label: {
-                                HStack {
-                                    Text(selectedMake.isEmpty ? "Select" : selectedMake)
-                                        .foregroundStyle(.black)
-                                    Spacer()
-                                    Image(systemName: "chevron.down")
-                                        .foregroundStyle(.black)
-                                }
-                                
-                                .padding()
-                                .background(RoundedRectangle(cornerRadius: 8).stroke(Color.black, lineWidth: 1))
-                            }
-                            .border(Color.clear)
-                        }
-                        
-                        VStack(alignment: .leading) {
-                            Text("Model")
-                            Menu {
-                                Button("Model X") { selectedModel = "Model X" }
-                                Button("Model Y") { selectedModel = "Model Y" }
-                            } label: {
-                                HStack {
-                                    Text(selectedModel.isEmpty ? "Select" : selectedModel)
-                                        .foregroundStyle(.black)
-                                    Spacer()
-                                    Image(systemName: "chevron.down")
-                                        .foregroundStyle(.black)
-                                }
-                                .padding()
-                                .background(RoundedRectangle(cornerRadius: 8).stroke(Color.black, lineWidth: 1))
-                            }
-                            .border(Color.clear)
-                        }
-                    }
+                    
+                    //MARK: - Make and Model
+                    makeAndModelSection()
+                        .padding(.horizontal, 10)
+                    
+                    //MARK: - MODEL YEAR:
                     
                     VStack(alignment: .leading) {
                         Text("MODEL YEAR:")
@@ -124,13 +145,15 @@ struct SearchFilterView: View {
                             Capsule()
                                 .fill(Color.white)
                                 .frame(height: 40)
-                                .shadow(color: .gray, radius: 2.0)
+                                .shadow(color: .black, radius: 2.0)
                             TextField("Enter model year.", text: $modelYearText)
                                 .padding(.leading,20)
                                 .cornerRadius(10)
                         }
                     }
+                    .padding(.horizontal, 10)
                     
+                    //MARK: - MODEL TYPE:
                     VStack(alignment: .leading) {
                         Text("BODY TYPE:")
                         ZStack(alignment: .leading){
@@ -143,9 +166,9 @@ struct SearchFilterView: View {
                                 .cornerRadius(10)
                         }
                     }
+                    .padding(.horizontal, 10)
                     
-                    
-                    
+                    //MARK: - FUEL
                     VStack(alignment: .leading) {
                         Text("FUEL:")
                         HStack {
@@ -167,33 +190,44 @@ struct SearchFilterView: View {
                             }
                         }
                     }
+                    .padding(.horizontal, 10)
+                    
+                    //MARK: - PRICE RANGE
                     
                     VStack(alignment: .leading) {
                         Text("PRICE RANGE:")
                         Text("A$\(Int(priceRange.lowerBound/1000))K - A$\(Int(priceRange.upperBound/1000))K")
                         RangeSlider(value: $priceRange, bounds: 10_000...100_000).accentColor(.black)
-        //                RangeSlider(range: $priceRange, inRange: 10_000...100_000, step: 1_000)
                             .accentColor(.black)
                     }
+                    .padding(.horizontal, 10)
+                    
+                    //MARK: - TRANSMISSION TYPE
                     
                     VStack(alignment: .leading) {
                         Text("TRANSMISSION TYPE:")
                         WrapHStack(items: ["Mannual", "Automatic", "Hybrid"], selected: $transmission)
                     }
+                    .padding(.horizontal, 10)
+                    
+                    //MARK: - SEATS TYPE
                     
                     VStack(alignment: .leading) {
                         Text("SEATS:")
                         WrapHStack(items: ["2", "4", "6"], selected: $seats)
                     }
+                    .padding(.horizontal, 10)
+                    
+                    //MARK: - SEATS TYPE
                     
                     VStack(alignment: .leading) {
                         Text("COLOR:")
                         WrapHStack(items: ["All", "Red", "White", "Blue", "Black"], selected: $color, colors: ["Red": .red, "White": .white, "Blue": .blue, "Black": .black])
                     }
+                    .padding(.horizontal, 10)
                 }
             }
             .scrollIndicators(.hidden)
-            .padding(5)
             
             HStack {
                 Button("Reset") {
@@ -223,8 +257,9 @@ struct SearchFilterView: View {
                 .foregroundColor(.white)
                 .cornerRadius(25)
             }
+            .padding(.horizontal, 20)
         }
-        .padding()
+//        .padding()
     }
 }
 

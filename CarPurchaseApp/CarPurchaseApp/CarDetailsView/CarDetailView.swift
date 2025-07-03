@@ -121,9 +121,12 @@ struct CarDetailView: View {
             VStack(alignment: .leading, spacing: 16) {
                 if let car = viewModel.carDetails{
                     
+                    //MARK: - Main Image
+                    
                     addMainImageSection(car)
                     
                     if isImageLoaded{
+                        //MARK: - Card View
                         CustomCardView{
                             VStack(alignment: .leading, spacing: 8){
                                 Text("\(car.specifications.generalInformation.brand) \(car.specifications.generalInformation.model)")
@@ -132,7 +135,7 @@ struct CarDetailView: View {
                                 Divider()
                                     .padding(.bottom,10)
                                 
-                                //PerformanceStatView
+                                //MARK: - PerformanceStatView
                                 HStack(spacing: 32) {
                                     PerformanceStatView(value: "363", unit: "mi", label: "Range (EPA est.)")
                                     PerformanceStatView(value: "\(car.specifications.performanceSpecs.maximumSpeed)", unit: "", label: "Top Speed")
@@ -143,13 +146,13 @@ struct CarDetailView: View {
                                 Divider()
                                     .padding(.bottom,10)
                                 
-                                //Main Info section
+                                //MARK: - Main Info section
                                 addMainImformationView(car)
                                 
                                 Divider()
                                     .padding(.bottom,10)
                                 
-                                //General Info section
+                                //MARK: - General Info section
                                 
                                 Text("General Information")
                                     .font(.headline)
@@ -164,7 +167,7 @@ struct CarDetailView: View {
                                     Divider()
                                         .padding(.bottom,10)
                                     
-                                    // Gallery Images
+                                    //MARK: - Gallery Images
                                     
                                     Text("Gallery")
                                         .font(.headline)
@@ -199,7 +202,8 @@ struct CarDetailView: View {
             .padding()
             
             if isImageLoaded{
-                //Bottom button
+                //MARK: _ Bottom button
+                
                 ZStack(alignment: .center){
                     HStack(alignment: .center) {
                         Button(action: {}) {

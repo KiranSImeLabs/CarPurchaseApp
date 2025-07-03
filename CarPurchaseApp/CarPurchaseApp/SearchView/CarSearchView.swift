@@ -15,44 +15,22 @@ struct CarSearchView: View {
     
     var body: some View {
         ZStack(alignment: .top){
-//            Image("Banner_Image")
-//                .resizable()
-//                .frame(height: 300)
-//                .scaledToFit()
-//                .padding(0)
+            //            Image("Banner_Image")
+            //                .resizable()
+            //                .frame(height: 300)
+            //                .scaledToFit()
+            //                .padding(0)
             VStack(alignment: .leading) {
-                // Car List
-                List {
-                    ForEach(viewModel.filteredCars,id: \.id) { car in
-                        CarCardView(car: car)
-                            .padding(.bottom,5)
-//                            .shadow(color: .gray, radius: 8.0)
-                            .overlay(content: {
-                                NavigationLink(destination:  CarDetailView(carId: car.id)) {
-                                    EmptyView()
-                                }
-                                .opacity(0)
-                            })
-                         // (title color of cell, right cheveron color of cell)
-                        
-                    }
-                    .listRowBackground(Color.white)
-                    .listRowSeparatorTint(.white)
-                    
-                } //: LIST
-                .scrollIndicators(.hidden)
-                .listStyle(.plain)
-                .backgroundStyle(Color.white)
-                .background(Color.white)
+                
                 HStack{
                     SearchTextField(text: $viewModel.searchText)
                         .focused($isFocusOn)
                         .padding(.leading, 10)
-                        .onAppear {
-                            DispatchQueue.main.async {
-                                isFocusOn = true
-                            }
-                        }
+//                        .onAppear {
+//                            DispatchQueue.main.async {
+//                                isFocusOn = true
+//                            }
+//                        }
                     Button {
                         showOverlay = true
                     } label: {
@@ -66,9 +44,35 @@ struct CarSearchView: View {
                             .shadow(color: .white, radius: 1.0)
                     }
                     .padding(.trailing, 10)
-
+                    
                 }
                 .padding(.bottom, 10)
+                
+                
+                
+                // Car List
+                List {
+                    ForEach(viewModel.filteredCars,id: \.id) { car in
+                        CarCardView(car: car)
+                            .padding(.bottom,5)
+                        //                            .shadow(color: .gray, radius: 8.0)
+                            .overlay(content: {
+                                NavigationLink(destination:  CarDetailView(carId: car.id)) {
+                                    EmptyView()
+                                }
+                                .opacity(0)
+                            })
+                        // (title color of cell, right cheveron color of cell)
+                        
+                    }
+                    .listRowBackground(Color.white)
+                    .listRowSeparatorTint(.white)
+                    
+                } //: LIST
+                .scrollIndicators(.hidden)
+                .listStyle(.plain)
+                .backgroundStyle(Color.white)
+                .background(Color.white)
             }
         }.fullScreenCover(isPresented: $showOverlay) {
             SearchFilterView(onApply: { dic in

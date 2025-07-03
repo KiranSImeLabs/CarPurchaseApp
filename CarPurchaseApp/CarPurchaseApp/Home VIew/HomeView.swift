@@ -1,5 +1,5 @@
 //
-//  HomeViewDummy.swift
+//  HomeView.swift
 //  CarPurchaseApp
 //
 //  Created by Simelabs on 26/06/25.
@@ -7,9 +7,9 @@
 
 import SwiftUI
 
-struct HomeViewDummy: View {
+struct HomeView: View {
     
-    @Binding var tabSelection: Int
+//    @Binding var tabSelection: Int
     @StateObject private var viewModel = CarListViewModel()
     
     var body: some View {
@@ -39,11 +39,12 @@ struct HomeViewDummy: View {
                         
                     }
                     
-                    Image("Banner_Image")
+                    Image("bmw")
                         .resizable()
-                        .frame(height: 190)
-                        .scaledToFit()
-                        .padding(0)
+                        .frame(height: 350)
+                        .padding(.horizontal, 0)
+                        .scaledToFill()
+//                        .padding([.leading,.t],0)
                     //rgba(88, 122, 120, 1)
                     HStack {
                         Spacer()
@@ -59,10 +60,10 @@ struct HomeViewDummy: View {
                     // Spacer().frame(height: 300) //230
                     
                     VStack() {
-                        SectionHeader(title: "Top Picks For You")
-                            .padding(.bottom)
-                        GridSection(items: ["Buy car", "Sell car", "Get loans"])
-                            .padding(.bottom)
+//                        SectionHeader(title: "Top Picks For You")
+//                            .padding(.bottom)
+//                        GridSection(items: ["Buy car", "Sell car", "Get loans"])
+//                            .padding(.bottom)
                         SectionHeader(title: "Featured Brands")
                             .padding(.bottom)
                         HStack{
@@ -88,6 +89,21 @@ struct HomeViewDummy: View {
                                 .frame(height: 40)
                             Spacer()
                         }
+                        
+                        SectionHeader(title: "Why Motora ?")
+                            .padding(.vertical, 15)
+                        VStack(alignment: .center, spacing: 10){
+//                            HStack{
+                                WhyMotoraCard(text: "All Styles. One Place", subText:"Handpicked vintage\n& classic cars" , cardImage: "why_3")
+                                WhyMotoraCard(text: "Verified Sellers", subText: "Each car listing is\nthoroughly reviewed", cardImage: "why_1")
+//                            }
+                            
+//                            HStack{
+                                WhyMotoraCard(text: "Nationwide Reach", subText:"Sellers from\nll across Australia" , cardImage: "why_2")
+                                WhyMotoraCard(text: "Trusted Community", subText: "Safe platform for\nenthusiasts & collectors", cardImage: "why_4")
+//                            }
+                        }
+                        
                     }
                     .padding([.leading, .trailing,.top])
 //                    .padding(.bottom,0)
@@ -111,6 +127,7 @@ struct HomeViewDummy: View {
                             // (title color of cell, right cheveron color of cell)
                             
                         }
+                        
                     }else{
                         Text("No Car found")
                     }
@@ -120,17 +137,11 @@ struct HomeViewDummy: View {
             .background(Color.white)
             .backgroundStyle(.white)
         }
-        
-        SearchTextField(text: $viewModel.searchText, isText: false)
-            .padding([.leading,.trailing,.bottom], 5)
-            .onTapGesture {
-                tabSelection = 1
-            }
     }
 }
 
 #Preview {
-    HomeViewDummy(tabSelection: .constant(0))
+    HomeView()
 }
 
 struct GridSection: View {
@@ -168,7 +179,7 @@ struct SectionHeader: View {
         HStack {
             //            Text("✨")
             Text(title.uppercased())
-                .font(.headline)
+                .font(.title3)
                 .fontWeight(.bold)
             //            Text("✨")
             Spacer()

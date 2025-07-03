@@ -91,7 +91,7 @@ struct CarCardView: View {
             RoundedRectangle(cornerRadius: 0)
                 .stroke(Color.black, lineWidth: 0.5)
         }
-        .hoverEffect(.lift)
+        
         //        .background(BackgroundView(topColor: .white, bottomColor: .white))
 //        .cornerRadius(16)
         //        .shadow(color: .gray, radius: 20.0)
