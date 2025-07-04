@@ -40,23 +40,27 @@ struct MenuView: View {
                 ExampleRow(text: "Contact", image: "phone.fill")
             }
             
-            VStack(spacing: 16) {
-                SectionHeader(title: "Why Motora?")
-                Image("icon_why_vintage")
-                    .resizable()
-                    .scaledToFit()
-                    .frame(height: 100)
-//                    .scaleEffect(scale)
-//                    .onAppear {
-//                        withAnimation(
-//                            Animation.easeInOut(duration: 2.5)
-//                                .repeatForever(autoreverses: true)
-//                        ) {
-//                            scale = 1.1 // target scale
-//                        }
-//                    }
+            Section(header: Text("")) {
+                ZStack{
+                    Rectangle().frame(height: 200)
+                        .overlay(
+                            LinearGradient(colors: [AppColorConstants.gradientColor3,AppColorConstants.gradientColor2,AppColorConstants.gradientColor2], startPoint: .top, endPoint: .bottom)
+                            
+                            
+                        )
+                    Text("Explore timeless vintage cars from across Australia.")
+                        .font(.custom("SnellRoundhand", size: 25))
+                        .fontWeight(.light)
+                        .foregroundStyle(.white)
+                        .multilineTextAlignment(.center)
+                    
+            
+                }
                 
+                
+                    .listRowInsets(EdgeInsets())
             }
+            
         }
         .listStyle(.insetGrouped)
     }

@@ -15,14 +15,10 @@ struct CarSearchView: View {
     
     var body: some View {
         ZStack(alignment: .top){
-            //            Image("Banner_Image")
-            //                .resizable()
-            //                .frame(height: 300)
-            //                .scaledToFit()
-            //                .padding(0)
             VStack(alignment: .leading) {
-                
+                Spacer().frame(height: 5.0)
                 HStack{
+                    
                     SearchTextField(text: $viewModel.searchText)
                         .focused($isFocusOn)
                         .padding(.leading, 10)
@@ -40,7 +36,7 @@ struct CarSearchView: View {
                             .padding(.horizontal, 10)
                             .padding(.vertical, 15)
                             .background(Color.black)
-                            .cornerRadius(12)
+//                            .cornerRadius(12)
                             .shadow(color: .white, radius: 1.0)
                     }
                     .padding(.trailing, 10)

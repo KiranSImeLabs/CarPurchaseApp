@@ -218,7 +218,7 @@ struct SearchFilterView: View {
                     }
                     .padding(.horizontal, 10)
                     
-                    //MARK: - SEATS TYPE
+                    //MARK: - Color
                     
                     VStack(alignment: .leading) {
                         Text("COLOR:")

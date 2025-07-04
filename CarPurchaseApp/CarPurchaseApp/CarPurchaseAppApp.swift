@@ -11,6 +11,8 @@ import SwiftUI
 struct CarPurchaseAppApp: App {
     var body: some Scene {
         WindowGroup {
+//            MenuView()
+//            HomeView() .ignoresSafeArea()
             MainViewSwitcher()
         }
     }

@@ -32,7 +32,7 @@ struct WhyMotoraCard: View {
                 .foregroundColor(.gray)
                 .multilineTextAlignment(.center)
         }
-        .padding()
+        .padding(15)
     }
 }
 

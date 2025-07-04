@@ -12,6 +12,7 @@ struct CarDetailView: View {
     @StateObject private var viewModel = CarDetailViewModel()
     @State private var isImageLoaded = false
     @State private var fullImageURL: URL?
+    @State private var selectedColor:String = "All"
     
     init(carId: String) {
         id = carId
@@ -33,8 +34,8 @@ struct CarDetailView: View {
         .onTapGesture {
             fullImageURL = nil
         }
-//        .padding(0)
-//        .background(Color.black.opacity(0.8))
+        //        .padding(0)
+        //        .background(Color.black.opacity(0.8))
     }
     
     fileprivate func addMainImageSection(_ car: CarDetailModel) -> some View {
@@ -57,7 +58,7 @@ struct CarDetailView: View {
                     .padding(.leading, 5)
                     .padding(.horizontal, 20)
                     .padding(.vertical, 10)
-                    .background(AppColorConstants.primaryColor)
+                    .background(AppColorConstants.tertiaryColor)
             }
         } placeholder: {
             Color.clear
@@ -67,8 +68,7 @@ struct CarDetailView: View {
     }
     
     fileprivate func addMainImformationView(_ car: CarDetailModel) -> some View {
-        return //fuelType
-       ( VStack(alignment: .leading,spacing: 8) {
+        return VStack(alignment: .leading,spacing: 8) {
             Label(car.specifications.generalInformation.startOfProduction, systemImage: "calendar")
             Label(car.specifications.performanceSpecs.fuelType, systemImage: "bolt.fill")
             Label("90 km", systemImage: "speedometer")
@@ -79,9 +79,9 @@ struct CarDetailView: View {
             
             //calendar
         }
-        .padding(.bottom,10)
-        .font(.subheadline)
-        .foregroundColor(.black) )
+            .padding(.bottom,10)
+            .font(.subheadline)
+            .foregroundColor(.black)
     }
     
     fileprivate func addGeneralInformationView(_ car: CarDetailModel) -> some View {
@@ -100,7 +100,7 @@ struct CarDetailView: View {
     }
     
     fileprivate func addGalleryImages() -> ForEach<[String], String, some View> {
-        return ForEach(viewModel.otherImages, id: \.self) { item in
+        return ForEach(viewModel.getImagesOfColor(color: selectedColor), id: \.self) { item in
             AsyncImage(url: URL(string: (item))) { image in
                 image.resizable()
                     .scaledToFill()
@@ -160,6 +160,19 @@ struct CarDetailView: View {
                                 
                                 addGeneralInformationView(car)
                                 
+                                Divider()
+                                    .padding(.bottom,10)
+                                
+                                //MARK: - Description section
+                                
+                                Text("Description")
+                                    .font(.headline)
+                                    .padding(.bottom,10)
+                                
+                                
+                                Text(car.description)
+                                    .font(.subheadline)
+                                    .padding(.bottom,10)
                                 
                                 
                                 if viewModel.otherImages.count > 0 {
@@ -172,10 +185,10 @@ struct CarDetailView: View {
                                     Text("Gallery")
                                         .font(.headline)
                                         .padding(.bottom,10)
-                                    
-                                    
+                                    if car.availableColors.count > 0 {
+                                        WrapHStack(items: ["All"] +  car.availableColors, selected: $selectedColor)
+                                    }
                                     addGalleryImages()
-                                    
                                 }
                                 
                             }
@@ -198,7 +211,6 @@ struct CarDetailView: View {
                     Text("Waiting for results")
                 }
             }
-            .backgroundStyle(.red)
             .padding()
             
             if isImageLoaded{
@@ -277,8 +289,8 @@ struct CustomCardView<Content: View>: View {
                 RoundedRectangle(cornerRadius: 0)
                     .stroke(Color.black, lineWidth: 0.5)
             }
-//            .cornerRadius(16)
-//            .shadow(color: .black.opacity(0.1), radius: 10, x: 0, y: 5)
+        //            .cornerRadius(16)
+        //            .shadow(color: .black.opacity(0.1), radius: 10, x: 0, y: 5)
     }
 }
 

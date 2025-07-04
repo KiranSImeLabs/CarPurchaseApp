@@ -14,13 +14,13 @@ struct SearchTextField: View {
     var isText: Bool = true
     var body: some View {
         ZStack(alignment: .leading){
-            Capsule()
+            Rectangle()
                 .fill(Color.white)
-                .frame(height: 60)
-                .shadow(color: .gray, radius: 5.0)
+                .frame(height: 50)
+                .shadow(color: .gray, radius: 1.0)
             TextField("Search cars...", text: $text)
                 .padding(.leading,20)
-                .cornerRadius(10)
+//                .cornerRadius(10)
                 .allowsHitTesting(isText)
         }
     }

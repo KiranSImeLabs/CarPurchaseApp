@@ -39,7 +39,7 @@ struct CarCardView: View {
                         .foregroundColor(.white)
                         .padding(.horizontal, 20)
                         .padding(.vertical, 10)
-                        .background(AppColorConstants.primaryColor)
+                        .background(AppColorConstants.tertiaryColor)
                 }.padding([.leading,.top,.trailing],0)
                 
             } placeholder: {
@@ -91,10 +91,6 @@ struct CarCardView: View {
             RoundedRectangle(cornerRadius: 0)
                 .stroke(Color.black, lineWidth: 0.5)
         }
-        
-        //        .background(BackgroundView(topColor: .white, bottomColor: .white))
-//        .cornerRadius(16)
-        //        .shadow(color: .gray, radius: 20.0)
     }
 }
 
@@ -102,3 +98,52 @@ struct CarCardView: View {
 //    CarCardView(car: Car(name: "BMW M4", model: "Coupe 2022", price: "A$75 Lakh", fuelType: .petrol, mileage: "15,000 km", imageName: "bmw"))
 //        .frame(width: 300, height: 300)
 //}
+
+struct CarCardView2: View {
+    var car: CarData
+    var body: some View {
+        VStack(alignment: .leading) {
+            
+            AsyncImage(url: URL(string: (car.mainImage))) { image in
+                
+                ZStack(alignment: .bottomLeading) {
+                    image.resizable()
+                        .scaledToFill()
+                        .padding([.leading,.trailing],0)
+                        .clipped()
+                    
+                    Rectangle()
+                        .fill(LinearGradient(gradient: Gradient(colors: [Color.red.opacity(0.8),Color.black.opacity(0.1)]), startPoint: .topLeading, endPoint: .bottomTrailing))
+                        .frame(height: 80)
+                        .overlay(
+                            HStack{
+                                VStack(alignment: .leading,spacing: 5) {
+                                    Text(car.title)
+                                        .font(Font.system(size: 18.0))
+                                        .fontWeight(.bold)
+                                        .foregroundStyle(.white)
+                                    Text("Engine (typical): 5.7L V8 350ci")
+                                        .font(Font.system(size: 15.0))
+                                        .fontWeight(.regular)
+                                        .foregroundStyle(.white)
+                                        .multilineTextAlignment(.center)
+                                }
+                                .padding(.leading, 15)
+                                Spacer()
+                            }
+                            
+                        )
+                    
+                }
+//                .padding([.leading,.top,.trailing],0)
+                
+            } placeholder: {
+                Color.clear
+            }
+        }
+        .background {
+            RoundedRectangle(cornerRadius: 0)
+                .stroke(Color.black, lineWidth: 0.5)
+        }
+    }
+}

@@ -50,7 +50,7 @@ struct DummyFrontView: View {
             .tag(2)
             
         }//TabView
-        .tint(AppColorConstants.redColor)
+        .tint(AppColorConstants.primaryColor)
         .onAppear(perform: {
             
             UITabBar.appearance().barTintColor = UIColor.white

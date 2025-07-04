@@ -12,15 +12,17 @@ struct CarDetailModel: Codable {
     let id, title: String
     let mainImage: String
     let price: Int
-    let otherImages: [OtherImage]
+    let description: String
     let specifications: Specifications
-    let createdAt, updatedAt: String
+    let availableColors: [String]
+    let otherImages: [OtherImage]
 }
 
 // MARK: - OtherImage
 struct OtherImage: Codable {
     let alt: String
     let src: String
+    let color: String
 }
 
 // MARK: - Specifications
