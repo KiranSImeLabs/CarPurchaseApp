@@ -23,6 +23,7 @@ struct ExampleRow: View {
 
 struct MenuView: View {
 //    @State private var scale: CGFloat = 1.0
+    @State private var showOverlay = false
     
     var body: some View {
         List {
@@ -34,6 +35,9 @@ struct MenuView: View {
             
             Section(header: Text("Settings")) {
                 ExampleRow(text: "Account", image: "person.crop.circle.fill")
+                    .onTapGesture {
+                        showOverlay = true
+                    }
                 ExampleRow(text: "About us", image: "info.circle.fill")
                 ExampleRow(text: "Privacy Policy", image: "lock.shield.fill")
                 ExampleRow(text: "Terms", image: "doc.text.fill")
@@ -63,6 +67,9 @@ struct MenuView: View {
             
         }
         .listStyle(.insetGrouped)
+        .sheet(isPresented: $showOverlay) {
+            LoginView()
+        }
     }
 }
 

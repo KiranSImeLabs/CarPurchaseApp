@@ -263,6 +263,7 @@ struct GeneralInformationView: View{
 
 struct PrimaryButtonStyle: ButtonStyle {
     var color: Color
+    var cornerRad:CGFloat = 12
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
             .font(.headline)
@@ -270,7 +271,7 @@ struct PrimaryButtonStyle: ButtonStyle {
             .frame(maxWidth: .infinity)
             .background(color.opacity(configuration.isPressed ? 0.7 : 1))
             .foregroundColor(.white)
-            .cornerRadius(12)
+            .cornerRadius(cornerRad)
     }
 }
 
