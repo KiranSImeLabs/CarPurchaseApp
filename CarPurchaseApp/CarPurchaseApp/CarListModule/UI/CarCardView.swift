@@ -87,6 +87,16 @@ struct CarCardView: View {
 //                .padding([.top,.bottom])
         }
 //        .padding()
+        .overlay(content: {
+            
+            /*
+             // Remove the cheveron button in list cell
+             */
+            NavigationLink(destination:  CarDetailView(carId: car.id)) {
+                EmptyView()
+            }
+            .opacity(0)
+        })
         .background {
             RoundedRectangle(cornerRadius: 0)
                 .stroke(Color.black, lineWidth: 0.5)

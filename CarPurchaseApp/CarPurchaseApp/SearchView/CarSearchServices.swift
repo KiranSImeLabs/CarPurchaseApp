@@ -63,23 +63,42 @@ struct CarFilterSearchRequest: NetworkRequest {
         /*
          ["selectedMake":selectedMake,"model":selectedModel,"fuel":fuel,"maxPrice":(Int(priceRange.upperBound)),"minPrice":(Int(priceRange.lowerBound)),"transmission":transmission,"seats":seats,"color":color,"modelYear":modelYearText,"bodyType":bodyTypeText]
          */
-
-        if let val = paramDict["selectedMake"] as? String, val.trim().count > 0{
-            string += "make=" + val
+        if paramDict.count > 0 {
             
+            var queryItem  = [URLQueryItem]()
+            
+            if let val = paramDict["selectedMake"] as? String, val.trim().count > 0{
+//                string += "make=" + val
+                
+                queryItem.append(URLQueryItem(name: "make", value: val))
+            }
+            
+            if let val = paramDict["maxPrice"] as? Int{
+//                string += "&maxPrice=\(val)"
+                queryItem.append(URLQueryItem(name: "maxPrice", value: "\(val)"))
+                
+            }
+            if let val = paramDict["minPrice"] as? Int{
+//                string += "&minPrice=\(val)"
+                queryItem.append(URLQueryItem(name: "minPrice", value: "\(val)"))
+            }
+            
+            queryItem.append(URLQueryItem(name: "page", value: "\(page)"))
+            queryItem.append(URLQueryItem(name: "limit", value: "\(20)"))
+            
+            let queryString = queryItem.compactMap { item -> String? in
+                guard let value = item.value else { return nil }
+                return "\(item.name)=\(value)"
+            }.joined(separator: "&")
+            
+            return APIConstants.getFilteredCar + queryString
+            
+        }else{
+            return APIConstants.getFilteredCar + "page=\(page)&limit=\(20)"
         }
         
-        if let val = paramDict["maxPrice"] as? Int{
-            string += "&maxPrice=\(val)"
-            
-        }
-        if let val = paramDict["minPrice"] as? Int{
-            string += "&minPrice=\(val)"
-            
-        }
         
         
-        return APIConstants.getFilteredCar + string + "&page=\(1)&limit=\(20)"
     } //APIConstants.getAllCars
     let method = "GET"
 

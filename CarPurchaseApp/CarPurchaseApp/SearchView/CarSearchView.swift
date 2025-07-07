@@ -34,7 +34,7 @@ struct CarSearchView: View {
                             .font(.system(size: 24, weight: .bold))
                             .foregroundColor(.white)
                             .padding(.horizontal, 10)
-                            .padding(.vertical, 15)
+                            .padding(.vertical, 13)
                             .background(Color.black)
 //                            .cornerRadius(12)
                             .shadow(color: .white, radius: 1.0)
@@ -51,15 +51,11 @@ struct CarSearchView: View {
                     ForEach(viewModel.filteredCars,id: \.id) { car in
                         CarCardView(car: car)
                             .padding(.bottom,5)
-                        //                            .shadow(color: .gray, radius: 8.0)
-                            .overlay(content: {
-                                NavigationLink(destination:  CarDetailView(carId: car.id)) {
-                                    EmptyView()
+                            .onAppear {
+                                if let value = viewModel.filteredCars.last,car.id == value.id{
+                                    viewModel.loadMore()
                                 }
-                                .opacity(0)
-                            })
-                        // (title color of cell, right cheveron color of cell)
-                        
+                            }
                     }
                     .listRowBackground(Color.white)
                     .listRowSeparatorTint(.white)
@@ -70,11 +66,16 @@ struct CarSearchView: View {
                 .backgroundStyle(Color.white)
                 .background(Color.white)
             }
-        }.fullScreenCover(isPresented: $showOverlay) {
+        }
+        .fullScreenCover(isPresented: $showOverlay) {
             SearchFilterView(onApply: { dic in
                 print(dic)
-                viewModel.filterSearch(page: 1, dict: dic)
+                viewModel.resetSearchDetails()
+                viewModel.filterSearch(dict: dic)
                 
+            }, onReset: {
+                viewModel.resetSearchDetails()
+                viewModel.filterSearch(dict: [String : Any]())
             })
         }
     }

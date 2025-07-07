@@ -15,7 +15,9 @@ class CarSearchViewModel: ObservableObject {
     
     private var cancellables = Set<AnyCancellable>()
     private var allCars: [CarData] = []
-    
+    private var listPage = 0
+    private var totalCount = 0
+    private var searchKeys:[String:Any] = [String:Any]()
     
     init() {
         setupBindings()
@@ -48,24 +50,46 @@ class CarSearchViewModel: ObservableObject {
     }
     
     private func searchCar(){
-        CarSearchServices().getSearchResult()
-            .sink { error in
-                print(error)
-            } receiveValue: { [weak self] value in
-                self?.allCars = value.data
-                self?.filteredCars = value.data
-            }
-            .store(in: &cancellables)
-
+        
+        self.filterSearch(dict: searchKeys)
     }
     
-    func filterSearch(page:Int,dict:[String:Any]){
-        CarSearchServices().getFilterSearchResult(serchKeys: dict, page: page)
+    func filterSearch(dict:[String:Any]){
+        self.searchKeys = dict
+        CarSearchServices().getFilterSearchResult(serchKeys: dict, page: listPage + 1)
             .sink { error in
                 print(error)
             } receiveValue: { [weak self] value in
-                self?.filteredCars = value.data
+                guard let self = self else {return}
+                self.populateValues(value: value)
             }
             .store(in: &cancellables)
     }
+    
+    func loadMore(){
+        if self.totalCount > self.allCars.count{
+            searchCar()
+        }
+    }
+    
+    
+    private func populateValues(value:CarModel){
+        self.listPage = Int(value.page) ?? 0
+        self.totalCount = value.total
+        self.allCars.append(contentsOf: value.data)
+        if searchText.count > 0{
+            let searchArr = value.data.filter{$0.title.contains(searchText)}
+            filteredCars.append(contentsOf: searchArr)
+        }else{
+            self.filteredCars.append(contentsOf: value.data)
+        }
+    }
+    
+    func resetSearchDetails(){
+        self.listPage = 0
+        self.allCars.removeAll()
+        self.filteredCars.removeAll()
+        self.totalCount = 0
+    }
+    
 }
