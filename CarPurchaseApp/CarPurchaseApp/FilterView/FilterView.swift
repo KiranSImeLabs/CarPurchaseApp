@@ -13,7 +13,7 @@ struct SearchFilterView: View {
     let onApply: ([String:Any]) -> Void
     let onReset: () -> Void
     
-    @State private var selectedMake: String = ""
+//    @State private var selectedMake: String = ""
     @State private var selectedModel: String = ""
     
     @State private var fuel: String = "Petrol"
@@ -25,13 +25,16 @@ struct SearchFilterView: View {
     @State private var modelYearText:String = ""
     @State private var bodyTypeText:String = ""
     
+    @State private var selectedMakes: Set<String> = []
+    @State private var showMenu = false
+    
     let makeArray = ["Citro","Pontiac","Alfa","Fiat","BMW","Chevrolet","Ford","Volkswagen","Jaguar","Mercedes-Benz","Porsche","Buick Roadmaste","Cadillac"].sorted()
     
     
     fileprivate func addMennuItems(title:String) -> some View  {
         return HStack{
             Button(title)
-            { selectedMake = title }
+            { selectedMakes.insert(title) }
         }
         
        
@@ -42,26 +45,29 @@ struct SearchFilterView: View {
             HStack {
                 VStack(alignment: .leading) {
                     Text("Make")
-                    Menu {
-                        
-                        ForEach(makeArray,id: \.self) { car in
-                            addMennuItems(title: car)
-                        }
-                        
-                    } label: {
+//                    Menu {
+//                        
+//                        ForEach(makeArray,id: \.self) { car in
+//                            addMennuItems(title: car)
+//                        }
+//                        
+//                    } label: {
                         HStack {
-                            Text(selectedMake.isEmpty ? "Select" : selectedMake)
+                            Text(selectedMakes.isEmpty ? "Select" : selectedMakes.first!)
                                 .foregroundStyle(.black)
                             Spacer()
                             Image(systemName: "chevron.down")
                                 .foregroundStyle(.black)
                         }
+                        .onTapGesture {
+                            showMenu.toggle()
+                        }
                         
                         .padding()
                         .background(RoundedRectangle(cornerRadius: 8).stroke(Color.black, lineWidth: 1))
                     }
-                    .border(Color.clear)
-                }
+//                    .border(Color.clear)
+//                }
                 
                 VStack(alignment: .leading) {
                     Text("Model")
@@ -91,6 +97,7 @@ struct SearchFilterView: View {
     
     
     var body: some View {
+        ZStack{
         VStack(alignment: .leading, spacing: 20) {
             HStack{
                 Text("Search Filter")
@@ -215,13 +222,13 @@ struct SearchFilterView: View {
             
             HStack {
                 Button("Reset") {
-                    selectedMake = ""
                     selectedModel = ""
                     fuel = "All"
                     priceRange = 10_000...60_000
                     transmission = "Newest"
                     seats = "Compact"
                     color = "All"
+                    selectedMakes.removeAll()
                     onReset()
                     dismiss()
                 }
@@ -234,7 +241,7 @@ struct SearchFilterView: View {
                 Button("Apply") {
                     // Apply logic
                     
-                    onApply(["selectedMake":selectedMake,"model":selectedModel,"fuel":fuel,"maxPrice":(Int(priceRange.upperBound)),"minPrice":(Int(priceRange.lowerBound)),"transmission":transmission,"seats":seats,"color":color,"modelYear":modelYearText,"bodyType":bodyTypeText])
+                    onApply(["selectedMake":selectedMakes,"model":selectedModel,"fuel":fuel,"maxPrice":(Int(priceRange.upperBound)),"minPrice":(Int(priceRange.lowerBound)),"transmission":transmission,"seats":seats,"color":color,"modelYear":modelYearText,"bodyType":bodyTypeText])
                     dismiss()
                 }
                 .frame(maxWidth: .infinity)
@@ -245,6 +252,27 @@ struct SearchFilterView: View {
             }
             .padding(.horizontal, 20)
         }
+            if showMenu{
+                ZStack{
+                    Color.black.opacity(0.4)
+                    Rectangle()
+                        .background(Color.black.opacity(0.1))
+                        .backgroundStyle(Color.clear)
+                        .foregroundColor(Color.clear)
+                        .onTapGesture {
+                            showMenu = false
+                        }
+                    MultipleSelectionPopUp(showMenu: $showMenu, selectedItems: $selectedMakes, options: makeArray)
+                }
+                
+                
+            }
+            
+        }
+        
+//        .popover(isPresented: $showMenu) {
+//            MultipleSelectionPopUp(showMenu: $showMenu, selectedItems: $selectedMakes, options: makeArray)
+//        }
 //        .padding()
     }
 }

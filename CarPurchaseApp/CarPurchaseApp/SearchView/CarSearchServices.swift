@@ -59,27 +59,22 @@ struct CarFilterSearchRequest: NetworkRequest {
     //http://192.168.0.72:3000/cars/getAllCars?maxPrice=10000&minPrice=1000&limit=20&page=1
     typealias ResponseType = CarModel
     var endpoint:String{
-        var string = ""
-        /*
-         ["selectedMake":selectedMake,"model":selectedModel,"fuel":fuel,"maxPrice":(Int(priceRange.upperBound)),"minPrice":(Int(priceRange.lowerBound)),"transmission":transmission,"seats":seats,"color":color,"modelYear":modelYearText,"bodyType":bodyTypeText]
-         */
         if paramDict.count > 0 {
             
             var queryItem  = [URLQueryItem]()
             
-            if let val = paramDict["selectedMake"] as? String, val.trim().count > 0{
-//                string += "make=" + val
-                
-                queryItem.append(URLQueryItem(name: "make", value: val))
+            if let val = paramDict["selectedMake"] as? Set<String>, val.count > 0{
+                let selectedMake = val.compactMap { item -> String in
+                    return item
+                }.joined(separator: ",")
+                queryItem.append(URLQueryItem(name: "make", value: selectedMake))
             }
             
             if let val = paramDict["maxPrice"] as? Int{
-//                string += "&maxPrice=\(val)"
                 queryItem.append(URLQueryItem(name: "maxPrice", value: "\(val)"))
                 
             }
             if let val = paramDict["minPrice"] as? Int{
-//                string += "&minPrice=\(val)"
                 queryItem.append(URLQueryItem(name: "minPrice", value: "\(val)"))
             }
             

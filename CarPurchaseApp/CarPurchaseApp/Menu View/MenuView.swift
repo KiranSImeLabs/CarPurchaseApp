@@ -10,13 +10,22 @@ import SwiftUI
 struct ExampleRow: View {
     let text:String
     let image:String
+    let action: () -> Void
     var body: some View {
-        HStack {
-            Image(systemName: image)
-                .foregroundColor(Color.init(red: 158.0/255.0, green: 143.0/255.0, blue: 127.0/255.0)) // Icon color
+        ZStack(alignment: .leading){
+            Color.white.opacity(0.1)
+            VStack(alignment: .leading){
+                HStack {
+                    Image(systemName: image)
+                        .foregroundColor(Color.init(red: 158.0/255.0, green: 143.0/255.0, blue: 127.0/255.0)) // Icon color
 
-            Text(text)
-                .foregroundColor(.primary) // Text color
+                    Text(text)
+                        .foregroundColor(.primary) // Text color
+                }
+            }
+        }
+        .onTapGesture {
+            action()
         }
     }
 }
@@ -24,24 +33,39 @@ struct ExampleRow: View {
 struct MenuView: View {
 //    @State private var scale: CGFloat = 1.0
     @State private var showOverlay = false
+    @Environment(\.openURL) var openURL
     
     var body: some View {
         List {
             Section(header: Text("Menu")) {
-                ExampleRow(text: "Buy used car", image: "car.fill")
-                ExampleRow(text: "Sell car", image: "arrowshape.turn.up.right.fill")
-                ExampleRow(text: "Get loans", image: "banknote.fill")
+                ExampleRow(text: "Buy used car", image: "car.fill", action: {
+                })
+                    .backgroundStyle(.green)
+                ExampleRow(text: "Sell car", image: "arrowshape.turn.up.right.fill", action: {
+                })
+                ExampleRow(text: "Get loans", image: "banknote.fill", action: {
+                })
             }
             
             Section(header: Text("Settings")) {
-                ExampleRow(text: "Account", image: "person.crop.circle.fill")
-                    .onTapGesture {
-                        showOverlay = true
-                    }
-                ExampleRow(text: "About us", image: "info.circle.fill")
-                ExampleRow(text: "Privacy Policy", image: "lock.shield.fill")
-                ExampleRow(text: "Terms", image: "doc.text.fill")
-                ExampleRow(text: "Contact", image: "phone.fill")
+                ExampleRow(text: "Account", image: "person.crop.circle.fill", action: {
+                    showOverlay = true
+                })
+//                    .onTapGesture {
+//                        showOverlay = true
+//                    }
+                ExampleRow(text: "About us", image: "info.circle.fill", action: {
+                    openURL(URL(string: "http://192.168.0.72:8080")!)
+                })
+                ExampleRow(text: "Privacy Policy", image: "lock.shield.fill", action: {
+                    openURL(URL(string: "http://192.168.0.72:8080")!)
+                })
+                ExampleRow(text: "Terms", image: "doc.text.fill", action: {
+                    openURL(URL(string: "http://192.168.0.72:8080")!)
+                })
+                ExampleRow(text: "Contact", image: "phone.fill", action: {
+                    openURL(URL(string: "http://192.168.0.72:8080")!)
+                })
             }
             
             Section(header: Text("")) {
