@@ -28,7 +28,11 @@ struct CarDetailView: View {
                     .scaledToFit()
                     .padding(10)
             } placeholder: {
-                Color.black.opacity(0.8)
+                Rectangle()
+                    .background(Color.white.opacity(0.3))
+                    .frame(height: 300)
+                ProgressView("Loading...")
+                    .tint(.white)
             }
         }
         .onTapGesture {
@@ -61,7 +65,11 @@ struct CarDetailView: View {
                     .background(AppColorConstants.tertiaryColor)
             }
         } placeholder: {
-            Color.clear
+            Rectangle()
+                .background(Color.white.opacity(0.3))
+                .frame(height: 300)
+            ProgressView("Loading...")
+                .tint(.white)
         }
         
         .clipped()
@@ -100,7 +108,7 @@ struct CarDetailView: View {
     }
     
     fileprivate func addGalleryImages() -> ForEach<[String], String, some View> {
-        return ForEach(viewModel.getImagesOfColor(color: selectedColor), id: \.self) { item in
+        return ForEach(viewModel.getImagesOfColor(), id: \.self) { item in
             AsyncImage(url: URL(string: (item))) { image in
                 image.resizable()
                     .scaledToFill()
@@ -109,7 +117,15 @@ struct CarDetailView: View {
                         fullImageURL = URL(string: (item))
                     }
             } placeholder: {
-                Color.black.opacity(0.8)
+                Color.black.opacity(0.3)
+                ZStack{
+                    Rectangle()
+                        .background(Color.white.opacity(0.3))
+                        .frame(height: 300)
+                    ProgressView("Loading...")
+                        .tint(.white)
+                }
+                
             }
             .clipped()
         }
@@ -185,9 +201,9 @@ struct CarDetailView: View {
                                     Text("Gallery")
                                         .font(.headline)
                                         .padding(.bottom,10)
-                                    if car.availableColors.count > 0 {
-                                        WrapHStack(items: ["All"] +  car.availableColors, selected: $selectedColor)
-                                    }
+//                                    if car.availableColors.count > 0 {
+//                                        WrapHStack(items: ["All"] +  car.availableColors, selected: $selectedColor)
+//                                    }
                                     addGalleryImages()
                                 }
                                 

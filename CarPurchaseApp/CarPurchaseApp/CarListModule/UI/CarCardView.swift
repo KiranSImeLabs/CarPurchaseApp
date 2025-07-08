@@ -43,7 +43,13 @@ struct CarCardView: View {
                 }.padding([.leading,.top,.trailing],0)
                 
             } placeholder: {
-                Color.clear
+                Rectangle()
+                    .background(Color.white.opacity(0.3))
+                    .backgroundStyle(Color.white.opacity(0.3))
+                    .foregroundStyle(Color.white.opacity(0.3))
+                    .frame(height: 300)
+                ProgressView("Loading...")
+                    .tint(.white)
             }
             .scaledToFill()
             

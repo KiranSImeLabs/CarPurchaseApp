@@ -12,6 +12,7 @@ class CarSearchViewModel: ObservableObject {
     @Published var searchText: String = ""
     @Published var selectedFuel: FuelType? = nil
     @Published private(set) var filteredCars: [CarData] = []
+    @Published var errorString:String = ""
     
     private var cancellables = Set<AnyCancellable>()
     private var allCars: [CarData] = []
@@ -57,10 +58,18 @@ class CarSearchViewModel: ObservableObject {
     func filterSearch(dict:[String:Any]){
         self.searchKeys = dict
         CarSearchServices().getFilterSearchResult(serchKeys: dict, page: listPage + 1)
-            .sink { error in
-                print(error)
+            .sink { result in
+                print(result)
+                switch result{
+                case.failure(let err) :
+                    self.errorString = err.localizedDescription
+                default:
+                    self.errorString = ""
+                    break
+                }
             } receiveValue: { [weak self] value in
                 guard let self = self else {return}
+                self.errorString = ""
                 self.populateValues(value: value)
             }
             .store(in: &cancellables)

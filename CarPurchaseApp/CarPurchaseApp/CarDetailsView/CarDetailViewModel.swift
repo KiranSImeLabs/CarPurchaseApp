@@ -33,14 +33,14 @@ class CarDetailViewModel: ObservableObject {
     
     func getImagesOfColor(color:String = "All") -> [String]{
         if let cardDetil = carDetails{
-            
-            if color == "All" {
-                return cardDetil.otherImages .map { $0.src }
-            }
-            
-            return cardDetil.otherImages
-                .filter { $0.color.lowercased() == color.lowercased() }
-                .map { $0.src }
+            return cardDetil.otherImages .map { $0.src }
+//            if color == "All" {
+//                return cardDetil.otherImages .map { $0.src }
+//            }
+//            
+//            return cardDetil.otherImages
+//                .filter { $0.color.lowercased() == color.lowercased() }
+//                .map { $0.src }
         }else{
             return []
         }

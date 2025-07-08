@@ -67,6 +67,7 @@ struct CarSearchView: View {
                 .background(Color.white)
             }
         }
+        .toast(isPresented:.constant(!viewModel.errorString.isEmpty) , message: viewModel.errorString)
         .fullScreenCover(isPresented: $showOverlay) {
             SearchFilterView(onApply: { dic in
                 print(dic)
