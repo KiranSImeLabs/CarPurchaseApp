@@ -11,7 +11,7 @@ struct SearchFilterView: View {
     
     @Environment(\.dismiss) private var dismiss
     let onApply: ([String:Any]) -> Void
-    
+    let onReset: () -> Void
     
     @State private var selectedMake: String = ""
     @State private var selectedModel: String = ""
@@ -25,8 +25,17 @@ struct SearchFilterView: View {
     @State private var modelYearText:String = ""
     @State private var bodyTypeText:String = ""
     
+    let makeArray = ["Citro","Pontiac","Alfa","Fiat","BMW","Chevrolet","Ford","Volkswagen","Jaguar","Mercedes-Benz","Porsche","Buick Roadmaste","Cadillac"].sorted()
     
     
+    fileprivate func addMennuItems(title:String) -> some View  {
+        return HStack{
+            Button(title)
+            { selectedMake = title }
+        }
+        
+       
+    }
     
     fileprivate func makeAndModelSection() -> some View {
         return (
@@ -34,35 +43,10 @@ struct SearchFilterView: View {
                 VStack(alignment: .leading) {
                     Text("Make")
                     Menu {
-                        Button("Citro")
-                        { selectedMake = "Citro" }
-                        Button("Pontiac")
-                        { selectedMake = "Pontiac" }
-                        Button("Alfa")
-                        { selectedMake = "Alfa" }
-                        Button("Fiat")
-                        { selectedMake = "Fiat" }
-                        Button("BMW")
-                        { selectedMake = "BMW" }
-                        Button("Chevrolet")
-                        { selectedMake = "Chevrolet" }
-                        Button("Ford")
-                        { selectedMake = "Ford" }
-                        Button("Volkswagen")
-                        { selectedMake = "Volkswagen" }
-                        Button("Jaguar")
-                        { selectedMake = "Jaguar" }
-                        Button("Mercedes-Benz")
-                        { selectedMake = "Mercedes-Benz" }
-                        Button("Porsche")
-                        { selectedMake = "Porsche" }
-                        Button("Buick Roadmaster ")
-                        { selectedMake = "Buick Roadmaster " }
-                        Button("Cadillac")
-                        { selectedMake = "Cadillac" }
                         
-                        
-                        
+                        ForEach(makeArray,id: \.self) { car in
+                            addMennuItems(title: car)
+                        }
                         
                     } label: {
                         HStack {
@@ -238,6 +222,8 @@ struct SearchFilterView: View {
                     transmission = "Newest"
                     seats = "Compact"
                     color = "All"
+                    onReset()
+                    dismiss()
                 }
                 .frame(maxWidth: .infinity)
                 .padding()
@@ -357,6 +343,9 @@ struct FlexibleView<Data: Collection, Content: View>: View where Data.Element: H
 #Preview {
     SearchFilterView(onApply: { val in
         print(val)
+        
+    }, onReset: {
+        print("val")
         
     })
 }
