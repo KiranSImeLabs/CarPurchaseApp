@@ -36,8 +36,8 @@ struct MultipleSelectionPopUp: View {
                                     .foregroundColor(.blue)
                             }else{
                                 //circle
-                                Image(systemName: "circle")
-                                    .foregroundColor(.gray)
+//                                Image(systemName: "circle")
+//                                    .foregroundColor(.gray)
                             }
                         }
                     }
@@ -49,14 +49,15 @@ struct MultipleSelectionPopUp: View {
             .background(Color.white)
             .frame( height: 400)
             .padding([.leading,.trailing],10)
-
-            Button {
-                showMenu = false
-            } label: {
-                Text("Done")
-                    .foregroundStyle(.blue)
-            }
-            .padding()
+            
+            //            Button {
+            //                showMenu = false
+            //            } label: {
+            //                Text("Done")
+            //                    .foregroundStyle(.blue)
+            //            }
+            //            .padding([.top,.bottom])
+            //            .padding([.leading,.trailing], 0)
         }
         .frame( width: 330)
         .background(Color.white)

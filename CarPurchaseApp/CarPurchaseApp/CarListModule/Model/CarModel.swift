@@ -9,13 +9,14 @@ import Foundation
 // MARK: - CarModel
 struct CarModel: Codable {
     let data: [CarData]
-    let page, limit: String
-    let total: Int
+    let page, limit, total: Int
 }
 
 // MARK: - Datum
 struct CarData: Codable {
     let id, title: String
     let mainImage: String
-    let price:Int?
+    let price: Int
+    let startOfProduction, fuelType, odometer, mileage: String
+    let description: String
 }

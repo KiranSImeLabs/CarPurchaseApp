@@ -72,9 +72,9 @@ struct CarCardView: View {
 //                .background(Color.black)
             
             HStack {
-                specificationStack(imageStr: "icon_speedometer", text: "120 km")
+                specificationStack(imageStr: "icon_speedometer", text: car.odometer)
                 Spacer()
-                specificationStack(imageStr: "icon_pump", text: "Petrol")
+                specificationStack(imageStr: "icon_pump", text: car.fuelType)
                 Spacer()
                 specificationStack(imageStr: "icon_geartype", text: "CVT")
             }

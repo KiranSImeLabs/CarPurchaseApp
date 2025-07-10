@@ -77,13 +77,13 @@ struct CarDetailView: View {
     
     fileprivate func addMainImformationView(_ car: CarDetailModel) -> some View {
         return VStack(alignment: .leading,spacing: 8) {
-            Label(car.specifications.generalInformation.startOfProduction, systemImage: "calendar")
+            let year = car.specifications.generalInformation.startOfProduction.split(separator: ",")[1]
+            Label(year, systemImage: "calendar")
             Label(car.specifications.performanceSpecs.fuelType, systemImage: "bolt.fill")
-            Label("90 km", systemImage: "speedometer")
-            
-            Label("Pune", systemImage: "mappin")
+            Label(car.specifications.performanceSpecs.odometer, systemImage: "speedometer")
             Label(car.specifications.drivetrainBrakesSuspensionSpecs.numberOfGearsAndTypeOfGearbox, systemImage: "transmission")
             Label("Listed: 5h ago", systemImage: "clock")
+            Label("Sydney", systemImage: "mappin")
             
             //calendar
         }
@@ -153,9 +153,9 @@ struct CarDetailView: View {
                                 
                                 //MARK: - PerformanceStatView
                                 HStack(spacing: 32) {
-                                    PerformanceStatView(value: "363", unit: "mi", label: "Range (EPA est.)")
+                                    PerformanceStatView(value: "\(car.specifications.performanceSpecs.mileage)", unit: "", label: "Mileage")
                                     PerformanceStatView(value: "\(car.specifications.performanceSpecs.maximumSpeed)", unit: "", label: "Top Speed")
-                                    PerformanceStatView(value: "4.9", unit: "sec", label: "0-60 mph")
+                                    PerformanceStatView(value: "4.9 sec", unit: "", label: "0-100 kmph")
                                 }
                                 .padding(.bottom,10)
                                 
