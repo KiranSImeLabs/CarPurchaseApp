@@ -32,14 +32,17 @@ struct CarCardView: View {
                     image.resizable()
                         .padding([.leading,.top],0)
                         .clipped()
+                        .animateOnScroll()
+                    
 
-                    Text("A$ \(car.price ?? 32000)")
+                    Text("A$ \(car.price)")
                         .font(Font.system(size: 14, weight: .semibold))
                         .fontWeight(.bold)
                         .foregroundColor(.white)
                         .padding(.horizontal, 20)
                         .padding(.vertical, 10)
                         .background(AppColorConstants.tertiaryColor)
+                        .animateOnScroll()
                 }.padding([.leading,.top,.trailing],0)
                 
             } placeholder: {
@@ -47,9 +50,11 @@ struct CarCardView: View {
                     .background(Color.white.opacity(0.3))
                     .backgroundStyle(Color.white.opacity(0.3))
                     .foregroundStyle(Color.white.opacity(0.3))
-                    .frame(height: 300)
+                    .frame(height: 200)
+                    .padding([.leading,.trailing], 15)
                 ProgressView("Loading...")
-                    .tint(.white)
+                    .tint(AppColorConstants.primaryColor)
+                    .frame(width: 100, height: 100)
             }
             .scaledToFill()
             

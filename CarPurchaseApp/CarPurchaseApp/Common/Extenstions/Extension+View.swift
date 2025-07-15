@@ -33,4 +33,8 @@ extension View {
                                     textColor: textColor))
     }
     
+    func animateOnScroll() -> some View {
+        self.modifier(AnimatedOnScroll())
+    }
+    
 }

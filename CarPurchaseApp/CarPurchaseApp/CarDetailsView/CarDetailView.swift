@@ -27,12 +27,15 @@ struct CarDetailView: View {
                 image.resizable()
                     .scaledToFit()
                     .padding(10)
+                    .animateOnScroll()
             } placeholder: {
                 Rectangle()
                     .background(Color.white.opacity(0.3))
                     .frame(height: 300)
                 ProgressView("Loading...")
                     .tint(.white)
+                    .tint(AppColorConstants.primaryColor)
+                    .frame(width: 100, height: 100)
             }
         }
         .onTapGesture {
@@ -51,6 +54,7 @@ struct CarDetailView: View {
                     .scaledToFill()
                     .padding(.leading, 0)
                     .padding(.trailing, 0)
+                    .animateOnScroll()
                     .onAppear {
                         isImageLoaded = true
                     }
@@ -146,6 +150,7 @@ struct CarDetailView: View {
                         CustomCardView{
                             VStack(alignment: .leading, spacing: 8){
                                 Text("\(car.specifications.generalInformation.brand) \(car.specifications.generalInformation.model)")
+                                    .animateOnScroll()
                                     .font(.title.bold())
                                     .padding(.bottom,10)
                                 Divider()
@@ -157,6 +162,7 @@ struct CarDetailView: View {
                                     PerformanceStatView(value: "\(car.specifications.performanceSpecs.maximumSpeed)", unit: "", label: "Top Speed")
                                     PerformanceStatView(value: "4.9 sec", unit: "", label: "0-100 kmph")
                                 }
+                                .animateOnScroll()
                                 .padding(.bottom,10)
                                 
                                 Divider()
@@ -164,6 +170,7 @@ struct CarDetailView: View {
                                 
                                 //MARK: - Main Info section
                                 addMainImformationView(car)
+                                    .animateOnScroll()
                                 
                                 Divider()
                                     .padding(.bottom,10)
@@ -175,6 +182,7 @@ struct CarDetailView: View {
                                     .padding(.bottom,10)
                                 
                                 addGeneralInformationView(car)
+                                    .animateOnScroll()
                                 
                                 Divider()
                                     .padding(.bottom,10)
@@ -189,6 +197,7 @@ struct CarDetailView: View {
                                 Text(car.description)
                                     .font(.subheadline)
                                     .padding(.bottom,10)
+                                    .animateOnScroll()
                                 
                                 
                                 if viewModel.otherImages.count > 0 {
@@ -205,6 +214,7 @@ struct CarDetailView: View {
 //                                        WrapHStack(items: ["All"] +  car.availableColors, selected: $selectedColor)
 //                                    }
                                     addGalleryImages()
+                                        .animateOnScroll()
                                 }
                                 
                             }

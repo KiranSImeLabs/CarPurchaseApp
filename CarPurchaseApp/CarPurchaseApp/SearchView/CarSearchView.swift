@@ -22,6 +22,7 @@ struct CarSearchView: View {
                     SearchTextField(text: $viewModel.searchText)
                         .focused($isFocusOn)
                         .padding(.leading, 10)
+                        .animateOnScroll()
 //                        .onAppear {
 //                            DispatchQueue.main.async {
 //                                isFocusOn = true
@@ -36,10 +37,11 @@ struct CarSearchView: View {
                             .padding(.horizontal, 10)
                             .padding(.vertical, 13)
                             .background(Color.black)
-//                            .cornerRadius(12)
-                            .shadow(color: .white, radius: 1.0)
+                        //                            .cornerRadius(12)
+                            .padding(.trailing, 10)
                     }
                     .padding(.trailing, 10)
+                    .animateOnScroll()
                     
                 }
                 .padding(.bottom, 10)

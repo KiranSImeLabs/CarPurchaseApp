@@ -30,6 +30,7 @@ struct HomeView: View {
                             .frame(width: 88,height: 15)
                             .scaledToFit()
                             .padding(.bottom,20)
+                            .animateOnScroll()
                         
                     }
                     Rectangle()
@@ -44,14 +45,16 @@ struct HomeView: View {
                         .resizable()
                         .scaledToFit()
                         .clipped()
+                        .animateOnScroll()
                     
                     HStack {
                         Spacer()
                         Text("Explore Australia’s finest collection of \ncars, old and new.")
-                            .foregroundStyle(.gray)
-                            .font(.subheadline)
+                            .foregroundStyle(AppColorConstants.primaryColor)
+                            .font(.custom("SnellRoundhand", size: 25))
                             .fontWeight(.regular)
                             .multilineTextAlignment(.center)
+                            .animateOnScroll()
                         Spacer()
                     }
                     .padding(.top)
@@ -64,6 +67,7 @@ struct HomeView: View {
                         
                         SectionHeader(title: "Featured Brands")
                             .padding(.bottom)
+                            .animateOnScroll()
                         HStack{
                             Image("icon_ford")
                                 .resizable()
@@ -85,12 +89,12 @@ struct HomeView: View {
                                 .scaledToFit()
                                 .frame(height: 40)
                         }
+                        .animateOnScroll()
                         
                         //MARK: - Why Motora?
                         SectionHeader(title: "Why Motora?")
                             .padding(.vertical, 15)
-                        
-                        
+
                         VStack(spacing: 10){
                             Text("More Than a Marketplace.\nMotora is a Movement")
                                 .font(.headline)
@@ -109,6 +113,7 @@ struct HomeView: View {
                             RoundedRectangle(cornerRadius: 0)
                                 .stroke(.gray, lineWidth: 0.5)
                         }
+                        .animateOnScroll()
                     }
                     .padding([.leading, .trailing,.top])
                     
@@ -120,7 +125,7 @@ struct HomeView: View {
                         SectionHeader(title: "Featured Lisiting")
                             .padding(.leading,15)
                             .padding(.vertical, 25)
-
+                        
                         ScrollView(.horizontal) {
                             HStack(spacing: 1) {
                                 ForEach(viewModel.filteredCars,id: \.id) { car in
@@ -136,6 +141,7 @@ struct HomeView: View {
                         .scrollIndicators(.visible)
                         .padding([.leading,.trailing],15)
                         .padding(.bottom,15)
+                        .animateOnScroll()
                         
                     }else{
                         Text("No Car found")
